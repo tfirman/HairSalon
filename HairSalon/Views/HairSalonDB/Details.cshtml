@@ -1,0 +1,14 @@
+@using HairSalonDB.Models
+<h1>@Model.GetName()</h1>
+<h3>@Model.GetDescription()</h3>
+<h4>Client List:</h4>
+@foreach(var client in @Model.GetClients())
+{
+      <p>@client.GetName()</p>
+}
+<form action="/stylists/@Model.GetId()" method="post">
+  <label for="new-client-name">Add a new Client for this Stylist:</label>
+  <input id="new-client-name" name="new-client-name" type="text">
+  <button type="submit">Submit</button>
+</form>
+<a href='/stylists'>View all Stylists</a>

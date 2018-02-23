@@ -7,9 +7,9 @@ using HSalon;
 namespace HairSalonDB.Tests
 {
     [TestClass]
-    public class StylistTest : IDisposable
+    public class StylistTests : IDisposable
     {
-        public StylistTest()
+        public StylistTests()
         {
             DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tim_firman_test;";
         }
@@ -66,7 +66,7 @@ namespace HairSalonDB.Tests
         [TestMethod]
         public void GetClients_RetrievesAllClientsWithStylist_ClientList()
         {
-            Stylist testStylist = new Stylist("Kevin Smith");
+            Stylist testStylist = new Stylist("Kevin Smith", "Clerk");
             testStylist.Save();
 
             Client firstClient = new Client("Melissa Arnold", testStylist.GetId());

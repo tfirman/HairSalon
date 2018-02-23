@@ -47,17 +47,17 @@ namespace HairSalonDB.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO clients (name, stylistId) VALUES (@name, @stylistId);";
+            cmd.CommandText = @"INSERT INTO clients (name, stylistid) VALUES (@name, @stylistid);";
 
             MySqlParameter name = new MySqlParameter();
             name.ParameterName = "@name";
             name.Value = this._name;
             cmd.Parameters.Add(name);
 
-            MySqlParameter stylistId = new MySqlParameter();
-            stylistId.ParameterName = "@stylistId";
-            stylistId.Value = this._stylistId;
-            cmd.Parameters.Add(stylistId);
+            MySqlParameter stylistid = new MySqlParameter();
+            stylistid.ParameterName = "@stylistid";
+            stylistid.Value = this._stylistId;
+            cmd.Parameters.Add(stylistid);
 
             cmd.ExecuteNonQuery();
             _id = (int) cmd.LastInsertedId;

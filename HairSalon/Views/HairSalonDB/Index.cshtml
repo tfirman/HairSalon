@@ -1,0 +1,12 @@
+@using HairSalonDB.Models
+<h1>Hair Salon Database</h1>
+<ul>
+  @foreach(var stylist in Model)
+  {
+        <h4>@stylist.GetName(): | <a href="/stylists/@stylist.GetId()">See Details</a></h4>
+  }
+</ul>
+<p><a href="/stylists/new">Add another stylist</a></p>
+<form action="/stylists/delete" method="post">
+  <button type="submit" name="button">Clear All Stylists</button>
+</form>

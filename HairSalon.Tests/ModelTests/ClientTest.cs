@@ -14,6 +14,12 @@ namespace HairSalonDB.Tests
             DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tim_firman_test;";
         }
 
+        public void Dispose()
+        {
+            Stylist.DeleteAll();
+            Client.DeleteAll();
+        }
+
         [TestMethod]
         public void GetAll_ClientsEmptyAtFirst_0()
         {
@@ -29,32 +35,5 @@ namespace HairSalonDB.Tests
             Assert.AreEqual(firstClient, secondClient);
         }
 
-        [TestMethod]
-        public void Save_SavesClientToDatabase_ClientList()
-        {
-            Client testClient = new Client("Melissa Arnold", 1);
-            testClient.Save();
-            List<Client> result = Client.GetAll();
-            List<Client> testList = new List<Client>{testClient};
-            CollectionAssert.AreEqual(testList, result);
-        }
-
-
-        [TestMethod]
-        public void Save_DatabaseAssignsIdToClient_Id()
-        {
-            Client testClient = new Client("Melissa Arnold", 1);
-            testClient.Save();
-            Client savedClient = Client.GetAll()[0];
-            int result = savedClient.GetId();
-            int testId = testClient.GetId();
-            Assert.AreEqual(testId, result);
-        }
-
-        public void Dispose()
-        {
-            Stylist.DeleteAll();
-            Client.DeleteAll();
-        }
     }
 }

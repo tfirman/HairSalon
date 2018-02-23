@@ -10,7 +10,7 @@ namespace HairSalonDB.Models
         private string _name;
         private string _description;
 
-        public Stylist(string name, string description = "", int iD = 0)
+        public Stylist(string name, string description, int iD = 0)
         {
             _id = iD;
             _name = name;
@@ -84,10 +84,8 @@ namespace HairSalonDB.Models
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
-
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM stylists;";
-
             cmd.ExecuteNonQuery();
 
             conn.Close();
@@ -102,16 +100,16 @@ namespace HairSalonDB.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO stylists (name, description) VALUES (@name, @description);";
+            cmd.CommandText = @"INSERT INTO stylists (name, description) VALUES (@Sty_name, @Sty_description);";
 
             MySqlParameter description = new MySqlParameter();
-            description.ParameterName = "@description";
-            description.Value = this._description;
+            description.ParameterName = "@Sty_description";
+            description.Value = _description;
             cmd.Parameters.Add(description);
 
             MySqlParameter name = new MySqlParameter();
-            name.ParameterName = "@name";
-            name.Value = this._name;
+            name.ParameterName = "@Sty_name";
+            name.Value = _name;
             cmd.Parameters.Add(name);
 
             cmd.ExecuteNonQuery();
