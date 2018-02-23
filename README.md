@@ -24,6 +24,30 @@ _This application is intended to operate a customer database for a hair salon.  
 
 _to be added_
 
+##Setup
+This app uses a MySQL database.  To set this up, run the following commands on a MySQL Server:
+
+CREATE DATABASE tim_firman;
+USE tim_firman;
+CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255), description VARCHAR(255));
+CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylistid BIGINT);
+
+CREATE DATABASE IF NOT EXISTS `tim_firman_test` DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+CREATE TABLE `tim_firman_test`.`clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `stylistid` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `tim_firman_test`.`clients` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+ALTER TABLE `tim_firman_test`.`clients` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+CREATE TABLE `tim_firman_test`.`stylists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `tim_firman_test`.`stylists` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+ALTER TABLE `tim_firman_test`.`stylists` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 ## Known Bugs
 
 None Known
