@@ -16,6 +16,7 @@ namespace HairSalonDB.Tests
         public void Dispose()
         {
             Stylist.DeleteAll();
+            Client.DeleteAll();
         }
 
         [TestMethod]
@@ -62,6 +63,22 @@ namespace HairSalonDB.Tests
             //Assert
             CollectionAssert.AreEqual(testList, result);
         }
+        [TestMethod]
+        public void GetClients_RetrievesAllClientsWithStylist_ClientList()
+        {
+            Stylist testStylist = new Stylist("Kevin Smith");
+            testStylist.Save();
+
+            Client firstClient = new Client("Melissa Arnold", testStylist.GetId());
+            firstClient.Save();
+            Client secondClient = new Client("Tony Akin", testStylist.GetId());
+            secondClient.Save();
+            List<Client> testClientList = new List<Client> {firstClient, secondClient};
+            List<Client> resultClientList = testStylist.GetClients();
+
+            CollectionAssert.AreEqual(testClientList, resultClientList);
+        }
+
     }
 
 }
