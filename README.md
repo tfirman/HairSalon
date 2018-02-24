@@ -18,11 +18,9 @@ _This application is intended to operate a customer database for a hair salon.  
 
 * The database and interface will support a query for details on a particular stylist, including a list of clients, if any
 
-* Support for the addition of clients will be implemented, where each client must always be assigned to exactly one stylist
+* Support for the addition of clients will be implemented, where each client must always be assigned to exactly one stylist_
 
 ## Setup/Installation Requirements
-
-_to be added_
 
 ##Setup
 This app uses a MySQL database.  To set this up, run the following commands on a MySQL Server:
@@ -48,13 +46,15 @@ CREATE TABLE `tim_firman_test`.`stylists` (
 ALTER TABLE `tim_firman_test`.`stylists` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
 ALTER TABLE `tim_firman_test`.`stylists` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
+Once the database is set up as described above, a dotnet restore command will be needed to restore the object files for the app, then the app should be run (dotnet run)
+
 ## Known Bugs
 
 None Known
 
 ## Technologies Used
 
-_This is a MVC C# server_
+_This is an MVC C# server, accessing a MySQL database_
 
 ### License
 

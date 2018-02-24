@@ -25,7 +25,9 @@ namespace HairSalonDB.Models
             else
             {
                 Client newClient = (Client) otherClient;
-                return this.GetId().Equals(newClient.GetId());
+                bool idEquality = (this.GetId() == newClient.GetId());
+                bool nameEquality = (this.GetName() == newClient.GetName());
+                return (idEquality && nameEquality);;
             }
         }
         public override int GetHashCode()

@@ -9,6 +9,12 @@ namespace HairSalonDB.Controllers
 {
     public class HairSalonDBController : Controller
     {
+        [HttpGet("/")]
+        public ActionResult ToIndex()
+        {
+            List<Stylist> allStylists = Stylist.GetAll();
+            return View("Index");
+        }
         [HttpGet("/stylists")]
         public ActionResult Index()
         {
