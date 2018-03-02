@@ -66,11 +66,11 @@ namespace HairSalonDB.Models
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
-                  int stylistId = rdr.GetInt32(0);
-                  string stylistName = rdr.GetString(1);
-                  string stylistDescription = rdr.GetString(2);
-                  Stylist newStylist = new Stylist(stylistName, stylistDescription, stylistId);
-                  allStylist.Add(newStylist);
+                int stylistId = rdr.GetInt32(0);
+                string stylistName = rdr.GetString(1);
+                string stylistDescription = rdr.GetString(2);
+                Stylist newStylist = new Stylist(stylistName, stylistDescription, stylistId);
+                allStylist.Add(newStylist);
             }
             conn.Close();
             if (conn != null)
@@ -85,7 +85,14 @@ namespace HairSalonDB.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM stylists;";
+            cmd.CommandText = @"DELETE FROM stylists;
+                DELETE FROM clients;
+                DELETE FROM specialties_stylists WHERE stylist_id = @StylistId;";
+
+            MySqlParameter styd = new MySqlParameter();
+            styd.ParameterName = "StylistId";
+            styd.Value = _id;
+            cmd.Parameters.Add(styd);
             cmd.ExecuteNonQuery();
 
             conn.Close();
@@ -129,7 +136,8 @@ namespace HairSalonDB.Models
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM stylists WHERE id = @StylistId;
-              DELETE FROM clients WHERE stylistid = @StylistId;";
+                DELETE FROM clients WHERE stylistid = @StylistId;
+                DELETE FROM specialties_stylists WHERE stylist_id = @StylistId;";
 
             MySqlParameter styd = new MySqlParameter();
             styd.ParameterName = "StylistId";
