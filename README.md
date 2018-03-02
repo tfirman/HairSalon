@@ -62,7 +62,7 @@ Once the database is set up as described above, a dotnet restore command will be
 
 ## Known Bugs
 
-None Known
+In spite of the specification request, not "ALL" of the client information is editable - specifically the unique client ID is not editable, because that would be silly.
 
 ## Technologies Used
 

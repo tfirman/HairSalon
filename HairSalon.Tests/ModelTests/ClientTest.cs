@@ -34,5 +34,36 @@ namespace HairSalonDB.Tests
             Client secondClient = new Client("Melissa Arnold", 1);
             Assert.AreEqual(firstClient, secondClient);
         }
+
+        [TestMethod]
+        public void Find_FindFindsClient_Client()
+        {
+            Client testClient = new Client("Melissa Arnold", 1);
+            testClient.Save();
+            Client result = Client.Find(testClient.GetId());
+            Assert.AreEqual(result, testClient);
+        }
+
+        [TestMethod]
+        public void Edit_EditChangesClient_Client()
+        {
+            Client testClient = new Client("Melissa Arnold", 1);
+            testClient.Save();
+            testClient.Edit("Al Pacino", 2);
+            Client result = Client.Find(testClient.GetId());
+            Assert.AreEqual("Al Pacino", result.GetName());
+            Assert.AreEqual(2, result.GetStylistId());
+        }
+
+        [TestMethod]
+        public void Delete_DeleteRemovesClient_ClientList()
+        {
+            Client testClient = new Client("Melissa Arnold", 1);
+            testClient.Save();
+            testClient.Delete();
+            List<Client> testList = new List<Client>{};
+            List<Client> result = Client.GetAll();
+            CollectionAssert.AreEqual(testList, result);
+        }
     }
 }

@@ -94,6 +94,7 @@ namespace HairSalonDB.Models
                 conn.Dispose();
             }
         }
+
         public void Save()
         {
             MySqlConnection conn = DB.Connection();
@@ -122,13 +123,61 @@ namespace HairSalonDB.Models
             }
         }
 
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM stylists WHERE id = @StylistId;";
+
+            MySqlParameter styd = new MySqlParameter();
+            styd.ParameterName = "StylistId";
+            styd.Value = _id;
+            cmd.Parameters.Add(styd);
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void Edit(string newName, string newDescription)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE stylists SET name = @nName, description = @newDescription WHERE id = @thisId;";
+
+            MySqlParameter styd = new MySqlParameter();
+            styd.ParameterName = "thisId";
+            styd.Value = _id;
+            cmd.Parameters.Add(styd);
+            MySqlParameter name = new MySqlParameter();
+            name.ParameterName = "@nName";
+            name.Value = newName;
+            cmd.Parameters.Add(name);
+            MySqlParameter descrip = new MySqlParameter();
+            descrip.ParameterName = "@newDescription";
+            descrip.Value = newDescription;
+            cmd.Parameters.Add(descrip);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
         public static Stylist Find(int id)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM `stylists` WHERE id = @thisId;";
+            cmd.CommandText = @"SELECT * FROM stylists WHERE id = @thisId;";
 
             MySqlParameter thisId = new MySqlParameter();
             thisId.ParameterName = "@thisId";
