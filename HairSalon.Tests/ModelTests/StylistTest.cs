@@ -59,7 +59,6 @@ namespace HairSalonDB.Tests
             secondClient.Save();
             List<Client> testClientList = new List<Client> {firstClient, secondClient};
             List<Client> resultClientList = testStylist.GetClients();
-
             CollectionAssert.AreEqual(testClientList, resultClientList);
         }
 
@@ -84,13 +83,26 @@ namespace HairSalonDB.Tests
         }
 
         [TestMethod]
-        public void Delete_DeleteRemovesStylist_Stylist()
+        public void Delete_DeleteRemovesStylist_StylistList()
         {
             Stylist testStylist = new Stylist("Kevin Smith", "Clerk");
             testStylist.Save();
             testStylist.Delete();
             List<Stylist> testList = new List<Stylist>{};
             List<Stylist> result = Stylist.GetAll();
+            CollectionAssert.AreEqual(testList, result);
+        }
+
+        [TestMethod]
+        public void Delete_DeleteRemovesStylistClients_ClientList()
+        {
+            Stylist testStylist = new Stylist("Kevin Smith", "Clerk");
+            testStylist.Save();
+            Client testClient = new Client("Melissa Arnold", testStylist.GetId());
+            testClient.Save();
+            testStylist.Delete();
+            List<Client> testList = new List<Client>{};
+            List<Client> result = Client.GetAll();
             CollectionAssert.AreEqual(testList, result);
         }
     }

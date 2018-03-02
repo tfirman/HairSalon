@@ -1,0 +1,23 @@
+@using HairSalonDB.Models
+<h1>@Model.GetName()</h1>
+<h3>Client of: @Stylist.Find(@Model.GetStylistId()).GetName()</h3>
+
+<form action="/client/@Model.GetId()/update" method="post">
+  <label for="edit-num">Change this client's name to:</label>
+  <input type="text" name="new-name" value="@Model.GetName()">
+  <label for="new-name">Change this client's stylist to:</label>
+  <select class="form-control" id="new-stylist" name="new-stylist">
+    @foreach(var allstylists in Stylist.GetAll())
+    {
+      <option value="@allstylists.GetId()">@allstylists.GetName()</option>
+    }
+  </select>
+  <button type="submit">Edit this client's details</button>
+</form>
+
+<form action="/client/@Model.GetId()/delete" method="post">
+  <h4>Delete this client</h4>
+  <button type="submit">Delete!</button>
+</form>
+<a href='/stylists'>View all stylists</a>
+<a href='/client'>View all clients</a>

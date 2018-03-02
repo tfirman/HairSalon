@@ -12,9 +12,9 @@ namespace HairSalonDB.Controllers
         [HttpGet("/")]
         public ActionResult ToIndex()
         {
-            List<Stylist> allStylists = Stylist.GetAll();
-            return View("Index");
+            return RedirectToAction("Index");
         }
+
         [HttpGet("/stylists")]
         public ActionResult Index()
         {
@@ -54,19 +54,20 @@ namespace HairSalonDB.Controllers
             return RedirectToAction("Details",id);
         }
 
-        // [HttpPost("/stylists/{id}/update")]
-        // public ActionResult UpdatePost(int id)
-        // {
-        //     Stylist thisStylist = Stylist.Find(id);
-        //     thisStylist.Edit(Request.Form["newname"]);
-        //     return RedirectToAction("Index");
-        // }
-        // [HttpPost("/stylists/{id}/delete")]
-        // public ActionResult DeletePost(int id)
-        // {
-        //     Stylist thisStylist = Stylist.Find(id);
-        //     thisStylist.Delete(id);
-        //     return RedirectToAction("Index");
-        // }
+        [HttpPost("/stylists/{id}/update")]
+        public ActionResult UpdatePost(int id)
+        {
+            Stylist thisStylist = Stylist.Find(id);
+            thisStylist.Edit(Request.Form["new-name"],Request.Form["new-descrip"]);
+            return RedirectToAction("Details",id);
+        }
+
+        [HttpPost("/stylists/{id}/delete")]
+        public ActionResult DeletePost(int id)
+        {
+            Stylist thisStylist = Stylist.Find(id);
+            thisStylist.Delete();
+            return RedirectToAction("Index");
+        }
     }
 }

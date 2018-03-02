@@ -1,14 +1,30 @@
 @using HairSalonDB.Models
 <h1>@Model.GetName()</h1>
 <h3>@Model.GetDescription()</h3>
+
+<form action="/stylists/@Model.GetId()/update" method="post">
+  <label for="edit-num">Change this stylist's name to:</label>
+  <input type="text" name="new-name" value="@Model.GetName()">
+  <label for="new-name">Change this stylist's description to:</label>
+  <input type="text" name="new-descrip" value="@Model.GetDescription()">
+  <button type="submit">Edit Stylist details</button>
+</form>
+
 <h4>Client List:</h4>
 @foreach(var client in @Model.GetClients())
 {
       <p>@client.GetName()</p>
 }
 <form action="/stylists/@Model.GetId()" method="post">
-  <label for="new-client-name">Add a new Client for this Stylist:</label>
+  <h4>Add a new Client for this Stylist:</h4>
+  <label for="new-client-name">Client Name:</label>
   <input id="new-client-name" name="new-client-name" type="text">
   <button type="submit">Submit</button>
 </form>
-<a href='/stylists'>View all Stylists</a>
+<form action="/stylists/@Model.GetId()/delete" method="post">
+  <h4>Delete this stylist</h4>
+  <label for="new-client-name">(Warning:  As all clients must have a stylist, this will also delete all this stylist's clients!)<br></label>
+  <button type="submit">Delete!</button>
+</form>
+<a href='/stylists'>View all stylists</a>
+<a href='/client'>View all clients</a>
