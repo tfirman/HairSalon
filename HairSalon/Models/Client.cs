@@ -53,16 +53,17 @@ namespace HairSalonDB.Models
 
             MySqlParameter name = new MySqlParameter();
             name.ParameterName = "@name";
-            name.Value = this._name;
+            name.Value = _name;
             cmd.Parameters.Add(name);
 
             MySqlParameter stylistid = new MySqlParameter();
             stylistid.ParameterName = "@stylistid";
-            stylistid.Value = this._stylistId;
+            stylistid.Value = _stylistId;
             cmd.Parameters.Add(stylistid);
 
             cmd.ExecuteNonQuery();
             _id = (int) cmd.LastInsertedId;
+
             conn.Close();
             if (conn != null)
             {

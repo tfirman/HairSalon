@@ -18,7 +18,19 @@ _This application is intended to operate a customer database for a hair salon.  
 
 * The database and interface will support a query for details on a particular stylist, including a list of clients, if any
 
-* Support for the addition of clients will be implemented, where each client must always be assigned to exactly one stylist_
+* Support for the addition of clients will be implemented, where each client must always be assigned to exactly one stylist
+
+* The database and interface will support the deletion of each or all of the stylists and clients
+
+* The database and interface will provide a view of all and individual views of each particular client
+
+* The name of each stylist must be editable, as well as all details of each client
+
+* A specialty must be created and along with view pages for all and each specialty
+
+* Each stylist may have one or more specialties added
+
+* The individual view for each stylist must list specialties, and the individual view for each specialty must list the matching stylists
 
 ## Setup/Installation Requirements
 
