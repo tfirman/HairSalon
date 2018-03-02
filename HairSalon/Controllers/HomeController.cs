@@ -27,6 +27,7 @@ namespace HairSalonDB.Controllers
         {
             return View();
         }
+
         [HttpPost("/stylists")]
         public ActionResult Create()
         {
@@ -34,18 +35,21 @@ namespace HairSalonDB.Controllers
             newStylist.Save();
             return RedirectToAction("Index");
         }
+        
         [HttpPost("/stylists/delete")]
         public ActionResult DeleteAll()
         {
             Stylist.DeleteAll();
             return RedirectToAction("Index");
         }
+
         [HttpGet("/stylists/{id}")]
         public ActionResult Details(int id)
         {
             Stylist stylist = Stylist.Find(id);
             return View(stylist);
         }
+
         [HttpPost("/stylists/{id}")]
         public ActionResult CreateClient(int id)
         {

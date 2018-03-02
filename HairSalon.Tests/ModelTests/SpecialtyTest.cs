@@ -44,5 +44,18 @@ namespace HairSalonDB.Tests
             Specialty result = Specialty.Find(testSpecialty.GetId());
             Assert.AreEqual(result, testSpecialty);
         }
+
+        [TestMethod]
+        public void AddStylist_AddsStylistToSpecialty_StylistList()
+        {
+            Stylist testStylist = new Stylist("Kevin Smith", "Clerk");
+            testStylist.Save();
+            Specialty testSpecialty = new Specialty("Mullets");
+            testSpecialty.Save();
+            testSpecialty.AddStylist(testStylist);
+            List<Stylist> result = testSpecialty.GetStylists();
+            List<Stylist> testList = new List<Stylist>{testStylist};
+            CollectionAssert.AreEqual(testList, result);
+        }
     }
 }

@@ -9,41 +9,40 @@ namespace HairSalonDB.Controllers
 {
     public class SpecialtyController : Controller
     {
-        [HttpGet("/client")]
-        public ActionResult ClIndex()
+        [HttpGet("/specialty")]
+        public ActionResult SpecialIndex()
         {
-            List<Client> allClients = Client.GetAll();
-            return View(allClients);
+            List<Specialty> allSpecialties = Specialty.GetAll();
+            return View(allSpecialties);
         }
 
-        [HttpPost("/client/delete")]
+        [HttpGet("/specialty/new")]
+        public ActionResult CreateSpecialForm()
+        {
+            return View();
+        }
+
+        [HttpPost("/specialty/delete")]
         public ActionResult DeleteAll()
         {
-            Client.DeleteAll();
+            Specialty.DeleteAll();
             return RedirectToAction("Index");
         }
 
-        [HttpGet("/client/{id}")]
-        public ActionResult ClientDetails(int id)
+        [HttpGet("/specialty/{id}")]
+        public ActionResult SpecialtyDetails(int id)
         {
-            Client client = Client.Find(id);
-            return View(client);
+            Specialty specialty = Specialty.Find(id);
+            return View(specialty);
         }
 
-        [HttpPost("/client/{id}/update")]
-        public ActionResult UpdateClient(int id)
+        [HttpPost("/specialty")]
+        public ActionResult CreateSpecialty()
         {
-            Client thisClient = Client.Find(id);
-            thisClient.Edit(Request.Form["new-name"],Int32.Parse(Request.Form["new-stylist"]));
-            return RedirectToAction("ClientDetails",id);
+            Specialty newSpecialty = new Specialty (Request.Form["new-specialty"]);
+            newSpecialty.Save();
+            return RedirectToAction("SpecialIndex");
         }
 
-        [HttpPost("/client/{id}/delete")]
-        public ActionResult DeleteClient(int id)
-        {
-            Client thisClient = Client.Find(id);
-            thisClient.Delete();
-            return RedirectToAction("ClIndex");
-        }
     }
 }
