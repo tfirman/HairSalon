@@ -5,7 +5,7 @@
 <ul>
   @foreach(var stylist in Stylist.GetAll())
   {
-        <h4>@stylist.GetName(): | <a href="/stylists/@stylist.GetId()">See Details</a></h4>
+    <h4>@stylist.GetName(): | <a href="/stylists/@stylist.GetId()">See Details</a></h4>
   }
 </ul>
 <p><a href="/stylists/new">Add another stylist</a></p>

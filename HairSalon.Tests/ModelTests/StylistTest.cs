@@ -25,6 +25,7 @@ namespace HairSalonDB.Tests
             int result = Stylist.GetAll().Count;
             Assert.AreEqual(0, result);
         }
+        
         [TestMethod]
         public void Stylist_DoesntSaveToDatabase_StylistCount()
         {
@@ -32,6 +33,7 @@ namespace HairSalonDB.Tests
             int result = Stylist.GetAll().Count;
             Assert.AreEqual(0, result);
         }
+
         [TestMethod]
         public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Stylist()
         {
@@ -39,6 +41,7 @@ namespace HairSalonDB.Tests
             Stylist secondStylist = new Stylist("Kevin Smith", "Clerk");
             Assert.AreEqual(firstStylist, secondStylist);
         }
+
         [TestMethod]
         public void Save_SavesToDatabase_StylistList()
         {
@@ -48,6 +51,7 @@ namespace HairSalonDB.Tests
             List<Stylist> testList = new List<Stylist>{testStylist};
             CollectionAssert.AreEqual(testList, result);
         }
+
         [TestMethod]
         public void GetClients_RetrievesAllClientsWithStylist_ClientList()
         {
@@ -118,6 +122,5 @@ namespace HairSalonDB.Tests
             List<Specialty> testList = new List<Specialty>{testSpecialty};
             CollectionAssert.AreEqual(testList, result);
         }
-
     }
 }

@@ -5,7 +5,7 @@
 <ul>
   @foreach(var specialty in Specialty.GetAll())
   {
-        <h4>@specialty.GetName(): | <a href="/specialty/@specialty.GetId()">See specialty details</a></h4>
+    <h4>@specialty.GetName(): | <a href="/specialty/@specialty.GetId()">See specialty details</a></h4>
   }
 </ul>
 <form action="/specialty/delete" method="post">

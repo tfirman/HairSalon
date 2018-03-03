@@ -5,7 +5,7 @@
 <ul>
   @foreach(var client in Client.GetAll())
   {
-        <h4>@client.GetName(): | <a href="/client/@client.GetId()">See client details</a></h4>
+    <h4>@client.GetName(): | <a href="/client/@client.GetId()">See client details</a></h4>
   }
 </ul>
 <form action="/client/delete" method="post">

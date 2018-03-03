@@ -13,7 +13,7 @@
 <h4>Client List:</h4>
 @foreach(var client in @Model.GetClients())
 {
-      <p>@client.GetName()</p>
+  <p>@client.GetName()</p>
 }
 <form action="/stylists/@Model.GetId()" method="post">
   <h4>Add a new Client for this Stylist:</h4>
@@ -25,7 +25,7 @@
 <h4>Specialty List:</h4>
 @foreach(var aspecialty in @Model.GetSpecialties())
 {
-      <p>@aspecialty.GetName()| <a href="/specialty/@aspecialty.GetId()">See specialty details</a></p>
+  <p>@aspecialty.GetName()| <a href="/specialty/@aspecialty.GetId()">See specialty details</a></p>
 }
 <form action="/stylists/@Model.GetId()/addspecialty" method="post">
   <select class="form-control" id="new-specialty" name="new-specialty">

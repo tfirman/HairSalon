@@ -166,11 +166,11 @@ namespace HairSalonDB.Models
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
-              int ClientId = rdr.GetInt32(0);
-              string ClientName = rdr.GetString(1);
-              int StylistId = rdr.GetInt32(2);
-              Client newClient = new Client(ClientName, StylistId, ClientId);
-              allClients.Add(newClient);
+                int ClientId = rdr.GetInt32(0);
+                string ClientName = rdr.GetString(1);
+                int StylistId = rdr.GetInt32(2);
+                Client newClient = new Client(ClientName, StylistId, ClientId);
+                allClients.Add(newClient);
             }
             conn.Close();
             if (conn != null)
