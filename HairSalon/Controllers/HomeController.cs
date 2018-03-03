@@ -35,7 +35,7 @@ namespace HairSalonDB.Controllers
             newStylist.Save();
             return RedirectToAction("Index");
         }
-        
+
         [HttpPost("/stylists/delete")]
         public ActionResult DeleteAll()
         {
@@ -72,6 +72,15 @@ namespace HairSalonDB.Controllers
             Stylist thisStylist = Stylist.Find(id);
             thisStylist.Delete();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost("/stylists/{id}/addspecialty")]
+        public ActionResult AddStylistSpecialty(int id)
+        {
+            Stylist thisStylist = Stylist.Find(id);
+            Specialty newSpecialty = Specialty.Find(Int32.Parse(Request.Form["new-specialty"]));
+            thisStylist.AddSpecialty(newSpecialty);
+            return RedirectToAction("Details",id);
         }
     }
 }

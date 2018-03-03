@@ -12,8 +12,7 @@ namespace HairSalonDB.Controllers
         [HttpGet("/specialty")]
         public ActionResult SpecialIndex()
         {
-            List<Specialty> allSpecialties = Specialty.GetAll();
-            return View(allSpecialties);
+            return View();
         }
 
         [HttpGet("/specialty/new")]
@@ -30,7 +29,7 @@ namespace HairSalonDB.Controllers
         }
 
         [HttpGet("/specialty/{id}")]
-        public ActionResult SpecialtyDetails(int id)
+        public ActionResult SpecialDetails(int id)
         {
             Specialty specialty = Specialty.Find(id);
             return View(specialty);
@@ -42,6 +41,15 @@ namespace HairSalonDB.Controllers
             Specialty newSpecialty = new Specialty (Request.Form["new-specialty"]);
             newSpecialty.Save();
             return RedirectToAction("SpecialIndex");
+        }
+
+        [HttpPost("/specialty/{id}/addStylist")]
+        public ActionResult AddSpecialStylist(int id)
+        {
+            Specialty thisSpecialty = Specialty.Find(id);
+            Stylist newStylist = Stylist.Find(Int32.Parse(Request.Form["new-stylist"]));
+            thisSpecialty.AddStylist(newStylist);
+            return RedirectToAction("SpecialDetails", id);
         }
 
     }

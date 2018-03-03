@@ -21,6 +21,22 @@
   <input id="new-client-name" name="new-client-name" type="text">
   <button type="submit">Submit</button>
 </form>
+
+<h4>Specialty List:</h4>
+@foreach(var aspecialty in @Model.GetSpecialties())
+{
+      <p>@aspecialty.GetName()| <a href="/specialty/@aspecialty.GetId()">See specialty details</a></p>
+}
+<form action="/stylists/@Model.GetId()/addspecialty" method="post">
+  <select class="form-control" id="new-specialty" name="new-specialty">
+    @foreach(var aspecialty in Specialty.GetAll())
+    {
+      <option value="@aspecialty.GetId()"> @aspecialty.GetName()</option>
+    }
+  </select>
+  <button type="submit">Add a new specialty to this stylist</button>
+</form>
+
 <form action="/stylists/@Model.GetId()/delete" method="post">
   <h4>Delete this stylist</h4>
   <label for="new-client-name">(Warning:  As all clients must have a stylist, this will also delete all this stylist's clients!)<br></label>
